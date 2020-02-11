@@ -51,6 +51,8 @@ resource "azurerm_virtual_machine" "main" {
   os_profile {
     computer_name  = var.deployment_name
     admin_username = var.vm_username
+
+    custom_data = data.template_file.user_data.rendered
   }
 
   os_profile_linux_config {
@@ -75,5 +77,4 @@ resource "azurerm_virtual_machine" "main" {
   }
 
   tags = var.tags
-
 }

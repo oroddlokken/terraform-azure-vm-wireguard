@@ -38,9 +38,5 @@ resource "azurerm_key_vault_access_policy" "vm_identity" {
 
   secret_permissions = [
     "get",
-    "set",
-    "delete",
-    "list",
-    "purge"
   ]
 }
