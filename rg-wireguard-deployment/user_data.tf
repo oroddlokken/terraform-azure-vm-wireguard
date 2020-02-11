@@ -34,7 +34,7 @@ data "template_file" "user_data" {
     peers = join("\n", local.peers_list)
 
     vm_identity_id = local.vm_identity_id
-    vault_name = data.azurerm_key_vault.main.name
-    kv_secret_name = "wg-priv-key" # TODO: Turn into variable
+    vault_name     = data.azurerm_key_vault.main.name
+    kv_secret_name = "wg-priv-key"
   }
 }

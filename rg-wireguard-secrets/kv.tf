@@ -35,8 +35,8 @@ resource "azurerm_key_vault_secret" "main" {
   name         = "wg-priv-key"
   key_vault_id = azurerm_key_vault.main.id
 
-  value        = var.wireguard_private_key
-  
+  value = var.wireguard_private_key
+
   tags = var.tags
 
   depends_on = [
@@ -46,6 +46,6 @@ resource "azurerm_key_vault_secret" "main" {
   lifecycle {
     ignore_changes = [
       value
-      ]
+    ]
   }
 }
