@@ -7,7 +7,7 @@ resource "azurerm_user_assigned_identity" "main" {
 
 resource "azurerm_role_definition" "vm_user" {
   name  = "vm_user"
-  scope = "/subscriptions/${var.azure_subscription_id}" # var.azure_subscription_id
+  scope = "/subscriptions/${var.azure_subscription_id}"
 
   permissions {
     actions = []
@@ -23,4 +23,24 @@ resource "azurerm_role_assignment" "vm_user" {
 
   role_definition_id = azurerm_role_definition.vm_user.id
   principal_id       = azurerm_user_assigned_identity.main.principal_id
+}
+
+resource "azurerm_key_vault_access_policy" "vm_identity" {
+  key_vault_id = data.azurerm_key_vault.main.id
+
+  tenant_id = var.azure_tenant_id
+
+  object_id = azurerm_user_assigned_identity.main.principal_id
+
+  key_permissions = [
+    "get"
+  ]
+
+  secret_permissions = [
+    "get",
+    "set",
+    "delete",
+    "list",
+    "purge"
+  ]
 }

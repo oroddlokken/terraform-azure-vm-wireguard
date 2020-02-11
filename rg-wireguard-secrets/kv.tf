@@ -31,34 +31,21 @@ resource "azurerm_key_vault_access_policy" "current" {
   ]
 }
 
-resource "azurerm_key_vault_access_policy" "vm_identity" {
-  key_vault_id = azurerm_key_vault.main.id
-
-  tenant_id = var.azure_tenant_id
-
-  object_id = azurerm_user_assigned_identity.main.principal_id
-
-  key_permissions = [
-    "get"
-  ]
-
-  secret_permissions = [
-    "get",
-    "set",
-    "delete",
-    "list",
-    "purge"
-  ]
-}
-
 resource "azurerm_key_vault_secret" "main" {
   name         = "wg-priv-key"
-  value        = "szechuan"
   key_vault_id = azurerm_key_vault.main.id
 
+  value        = var.wireguard_private_key
+  
   tags = var.tags
 
   depends_on = [
     azurerm_key_vault_access_policy.current
   ]
+
+  lifecycle {
+    ignore_changes = [
+      value
+      ]
+  }
 }
