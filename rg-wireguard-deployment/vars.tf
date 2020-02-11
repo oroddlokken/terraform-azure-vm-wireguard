@@ -25,7 +25,7 @@ variable vnet_default_subnet_cidr {
 }
 
 variable vm_size {
-  default = "Standard_B1ls"
+  default = "Standard_B2s"
 }
 
 variable mgmt_allowed_hosts {

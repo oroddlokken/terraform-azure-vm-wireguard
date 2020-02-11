@@ -76,9 +76,4 @@ resource "azurerm_virtual_machine" "main" {
 
   tags = var.tags
 
-  lifecycle {
-    ignore_changes = [
-      vm_size
-    ]
-  }
 }
