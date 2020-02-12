@@ -1,5 +1,17 @@
 # Terraform deployment for VMs with WireGuard on Microsoft Azure
 
+This deployment sets up a VM in Azure running WireGuard, along with a VNet, a subnet, NIC, storage accounts, etc.
+
+## Resources created:
+- VNet
+- A subnet
+- A public IP
+- A NIC for the VM
+- A VM
+- A storage account for boot diagnostics
+- A user assigned identity for the VM
+- IAM policies for the VM identity
+
 ## Example `terraform.tfvars`
 ```
 azure_tenant_id       = "some_tenant_id"
